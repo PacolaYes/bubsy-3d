@@ -17,6 +17,7 @@ dofile("Libs/lib_customhud.lua")
 
 dofile("Functions/player.lua")
 dofile("Functions/auxiliary.lua")
+dofile("Functions/movies.lua")
 
 dofile("definitions.lua")
 dofile("death anims.lua")
@@ -26,5 +27,3 @@ dofile("States/base.lua")
 dofile("States/States/grounded.lua")
 dofile("States/States/jumped.lua")
 dofile("States/States/dead.lua")
-
-dofile("movies.lua")

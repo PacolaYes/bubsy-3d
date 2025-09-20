@@ -3,6 +3,11 @@
 -- except the state thing
 -- that's in States/States :P
 
+local movieList = {
+    [DMG_WATER] = "DROWN",
+    ["default"] = "EXPLODE"
+}
+
 ---@param pmo mobj_t
 ---@param inf mobj_t
 ---@param src mobj_t
@@ -15,7 +20,26 @@ addHook("MobjDeath", function(pmo, inf, src, dmgtype)
 
     local p = pmo.player ---@cast p bubsyPlayer_t
     
-    Bubsy3D.startMovie(p, "EXPLODE")
+    local selectedMovie = movieList[DMG_WATER] or movieList.default
+    if type(selectedMovie) == "table" then
+        selectedMovie = selectedMovie[P_RandomRange(1, #selectedMovie)]
+    end
+
+    Bubsy3D.startMovie(p, selectedMovie)
     --p.playerstate = PST_DEAD
     Bubsy3D.state.changeState(p, "you are dead, no big surprise")
 end, MT_PLAYER)
+
+-- add 'em up!
+
+Bubsy3D.addMovie({
+    name = "EXPLODE",
+    fps = 15,
+    numframes = 91
+})
+
+Bubsy3D.addMovie({
+    name = "DROWN",
+    fps = 15,
+    numframes = 111
+})

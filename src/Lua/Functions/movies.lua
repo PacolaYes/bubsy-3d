@@ -114,12 +114,6 @@ customhud.SetupItem("bubsyMovies", "bubsy3d", function(v)
     end)
 end, "gameandscores") ---@diagnostic disable-line: param-type-mismatch
 
-Bubsy3D.addMovie({
-    name = "EXPLODE",
-    fps = 15,
-    numframes = 91
-})
-
 ---@param p bubsyPlayer_t
 addHook("PlayerThink", function(p)
     if not (p.mo and p.mo.valid)

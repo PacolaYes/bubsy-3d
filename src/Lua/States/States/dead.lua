@@ -16,6 +16,6 @@ Bubsy3D.state.addState({
             return "grounded"
         end
 
-        print(p.deadtimer)
+        --print(p.deadtimer)
     end
 })
