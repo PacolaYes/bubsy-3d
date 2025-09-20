@@ -1,0 +1,15 @@
+name = 3dbubsy
+realname = Bubsy
+hudname = Bubsy
+flags = SF_NOJUMPSPIN|SF_MARIODAMAGE
+ability = CA_NONE
+ability2 = CA2_NONE
+spinitem = MT_NULL
+actionspd = 100
+normalspeed = 0
+acceleration = 0
+runspeed = 9999
+startcolor = 96
+height = 31
+prefcolor = Orange
+supercolor = Gold

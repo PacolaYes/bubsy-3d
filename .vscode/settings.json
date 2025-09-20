@@ -1,0 +1,9 @@
+{
+    "Lua.diagnostics.globals": [
+        "ease",
+        "P_ResetCamera"
+    ],
+    "Lua.diagnostics.disable": [
+        "undefined-field"
+    ]
+}
