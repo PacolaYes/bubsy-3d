@@ -96,7 +96,9 @@ end)
 
 addHook("PostThinkFrame", function()
     for p in players.iterate do
-        p.drawangle = p.cmd.angleturn << 16
+        if p.realmo.skin == "3dbubsy" then
+            p.drawangle = p.cmd.angleturn << 16
+        end
 
         executeState(p, "postThink")
     end

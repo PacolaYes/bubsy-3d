@@ -121,3 +121,15 @@ Bubsy3D.state.addState({
         p.cmd.sidemove = 0
     end
 })
+
+addHook("MobjMoveBlocked", function(pmo)
+    if not (pmo and pmo.valid)
+    or pmo.skin ~= "3dbubsy"
+    or not (pmo.player and pmo.player.valid) then return end
+
+    local p = pmo.player
+    if p.bubsy3d
+    and p.bubsy3d.curState == "grounded" then
+        p.bubsy3d.runtics = 0
+    end
+end, MT_PLAYER)
