@@ -39,7 +39,8 @@ local playerTable = {
         camturn = 0, -- the angle the camera should turn at, always trying to go back to 0
 
         -- jump state stuff :þ
-        cameramo = nil ---@type mobj_t?
+        cameramo = nil, ---@type mobj_t?
+        jumpAngle = 0 ---@type angle_t
     }
 }
 

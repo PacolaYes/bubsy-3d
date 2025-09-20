@@ -12,6 +12,8 @@ Bubsy3D.state.addState({
         if (p.bubsy3d.cameramo and p.bubsy3d.cameramo.valid) then
             P_RemoveMobj(p.bubsy3d.cameramo)
         end
+        p.bubsy3d.speed = R_PointToDist2(0, 0, p.mo.momx, p.mo.momy)
+        p.bubsy3d.jumpAngle = R_PointToAngle2(0, 0, p.mo.momx, p.mo.momy)
     end,
 
     ---@param p bubsyPlayer_t
@@ -20,8 +22,15 @@ Bubsy3D.state.addState({
             return "grounded"
         end
 
+        local desiredSpeed = 0
         if (p.cmd.forwardmove or p.cmd.sidemove) then
-            P_InstaThrust(p.mo, p.mo.angle + R_PointToAngle2(0, 0, p.cmd.forwardmove*FU, -p.cmd.sidemove*FU), 7*FU)
+            p.bubsy3d.jumpAngle = Bubsy3D.approachAngle($, (p.cmd.angleturn << 16) + R_PointToAngle2(0, 0, p.cmd.forwardmove * FU, -p.cmd.sidemove * FU), 6)
+            desiredSpeed = 10*FU
+        end
+        P_InstaThrust(p.mo, p.bubsy3d.jumpAngle, p.bubsy3d.speed)
+
+        if p.bubsy3d.speed ~= desiredSpeed then
+            p.bubsy3d.speed = $ + (desiredSpeed - $) / 16
         end
     end,
 
