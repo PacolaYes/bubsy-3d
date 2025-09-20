@@ -131,6 +131,7 @@ Bubsy3D.state.addState({
     end
 })
 
+---@param pmo mobj_t
 addHook("MobjMoveBlocked", function(pmo)
     if not (pmo and pmo.valid)
     or pmo.skin ~= "3dbubsy"

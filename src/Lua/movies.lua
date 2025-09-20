@@ -137,16 +137,3 @@ addHook("PlayerThink", function(p)
         end
     end
 end)
-
----@param pmo mobj_t
----@param inf mobj_t
----@param src mobj_t
----@param dmgtype integer
-addHook("MobjDeath", function(pmo, inf, src, dmgtype)
-    if not (pmo and pmo.valid)
-    or pmo.skin ~= "3dbubsy" then return end
-
-    local p = pmo.player ---@cast p bubsyPlayer_t
-    
-    Bubsy3D.startMovie(p, "EXPLODE")
-end, MT_PLAYER)
