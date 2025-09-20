@@ -24,13 +24,19 @@ Bubsy3D.state.addState({
 
         local desiredSpeed = 0
         if (p.cmd.forwardmove or p.cmd.sidemove) then
-            p.bubsy3d.jumpAngle = Bubsy3D.approachAngle($, (p.cmd.angleturn << 16) + R_PointToAngle2(0, 0, p.cmd.forwardmove * FU, -p.cmd.sidemove * FU), 6)
-            desiredSpeed = 10*FU
+            local moveang = (p.cmd.angleturn << 16) + R_PointToAngle2(0, 0, p.cmd.forwardmove * FU, -p.cmd.sidemove * FU)
+            if p.bubsy3d.speed < 2*p.mo.scale then
+                p.bubsy3d.jumpAngle = moveang
+            else
+                p.bubsy3d.jumpAngle = Bubsy3D.approachAngle($, moveang, 6)
+            end
+
+            desiredSpeed = 8*p.mo.scale
         end
         P_InstaThrust(p.mo, p.bubsy3d.jumpAngle, p.bubsy3d.speed)
 
         if p.bubsy3d.speed ~= desiredSpeed then
-            p.bubsy3d.speed = $ + (desiredSpeed - $) / 16
+            p.bubsy3d.speed = $ + (desiredSpeed - $) / (TICRATE / 2)
         end
     end,
 

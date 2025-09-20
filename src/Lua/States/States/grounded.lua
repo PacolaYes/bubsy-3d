@@ -130,6 +130,6 @@ addHook("MobjMoveBlocked", function(pmo)
     local p = pmo.player
     if p.bubsy3d
     and p.bubsy3d.curState == "grounded" then
-        p.bubsy3d.runtics = 0
+        p.bubsy3d.runTics = 0
     end
 end, MT_PLAYER)
