@@ -74,13 +74,14 @@ Bubsy3D.state.addState({
             if p.bubsy3d.backpedalTime <= TICRATE/3
             and p.cmd.forwardmove > -15 then
                 P_SetObjectMomZ(p.mo, 3*FU)
-                P_InstaThrust(p.mo, camAngle, -3*FU)
+                p.bubsy3d.speed = -3*p.mo.scale
                 p.mo.state = S_PLAY_WALK
                 p.bubsy3d.backpedalTime = 0
             end
         elseif p.bubsy3d.cmdHeld.forwardmove
         and p.cmd.forwardmove <= -15 then
-            P_InstaThrust(p.mo, camAngle + ANGLE_180, WALKSPEED)
+
+            p.bubsy3d.speed = $ + (FixedMul(-WALKSPEED, p.mo.scale) - $) / 4
             if p.mo.state ~= S_PLAY_WALK then
                 p.mo.state = S_PLAY_WALK
             end
@@ -101,11 +102,12 @@ Bubsy3D.state.addState({
                 end
                 
                 local speed = p.bubsy3d.runTics > RUN_TIME and RUNSPEED or WALKSPEED
-                P_InstaThrust(p.mo, p.mo.angle, speed)
+                p.bubsy3d.speed = $ + (FixedMul(speed, p.mo.scale) - $) / 4
             end
         else
             p.bubsy3d.runTics = 0
         end
+        P_InstaThrust(p.mo, p.mo.angle, p.bubsy3d.speed)
 
         -- camera thing
         if abs(p.cmd.sidemove) > 15 then
@@ -114,6 +116,13 @@ Bubsy3D.state.addState({
             p.bubsy3d.camturn = Bubsy3D.approachAngle($, FixedAngle(6*FU * -sign), TICRATE / 3)
         else
             p.bubsy3d.camturn = Bubsy3D.approachAngle($, 0, 4)
+        end
+
+        if abs(p.cmd.forwardmove) < 15 then
+            p.bubsy3d.speed = FixedMul($, p.mo.friction)
+            if abs(p.bubsy3d.speed) < FU then
+                p.bubsy3d.speed = 0
+            end
         end
 
         p.bubsy3d.cmdHeld.forwardmove = abs(p.cmd.forwardmove) > 15 and $+1 or 0

@@ -36,7 +36,11 @@ Bubsy3D.state.addState({
         P_InstaThrust(p.mo, p.bubsy3d.jumpAngle, p.bubsy3d.speed)
 
         if p.bubsy3d.speed ~= desiredSpeed then
-            p.bubsy3d.speed = $ + (desiredSpeed - $) / (TICRATE / 2)
+            if desiredSpeed then
+                p.bubsy3d.speed = $ + (desiredSpeed - $) / 8
+            else
+                p.bubsy3d.speed = FixedMul($, p.mo.friction)
+            end
         end
     end,
 
