@@ -44,5 +44,4 @@ dofile("States/base.lua")
 dofile("States/States/grounded.lua")
 dofile("States/States/jumped.lua")
 
---dofile("camera.lua")
 dofile("movies.lua")
