@@ -20,7 +20,7 @@ addHook("MobjDeath", function(pmo, inf, src, dmgtype)
 
     local p = pmo.player ---@cast p bubsyPlayer_t
     
-    local selectedMovie = movieList[DMG_WATER] or movieList.default
+    local selectedMovie = movieList[dmgtype] or movieList.default
     if type(selectedMovie) == "table" then
         selectedMovie = selectedMovie[P_RandomRange(1, #selectedMovie)]
     end
