@@ -55,6 +55,6 @@ jobs:
       uses: Sniddl/discord-commits@v1.6
       with:
         webhook: ${{ secrets.DISCORD_WEBHOOK }}
-        message: "Successful commit to **${{ github.ref_name }}**"
+        message: "heres the commits, i am bubbie cat"
         template: "avatar-with-link"
         include-extras: true
