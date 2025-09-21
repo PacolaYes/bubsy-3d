@@ -1,2 +1,4 @@
 # Current Features!!!
-walking
+- walking
+- jumping
+- exploding
