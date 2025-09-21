@@ -5,7 +5,12 @@
 
 local movieList = {
     [DMG_WATER] = "DROWN",
-    ["default"] = "EXPLODE"
+    ["default"] = "EXPLODE",
+    ["uwDeath"] = {
+        "UWDEATH1",
+        "UWDEATH2",
+        "UWDEATH3"
+    }
 }
 
 ---@param pmo mobj_t
@@ -21,6 +26,12 @@ addHook("MobjDeath", function(pmo, inf, src, dmgtype)
     local p = pmo.player ---@cast p bubsyPlayer_t
     
     local selectedMovie = movieList[dmgtype] or movieList.default
+
+    if (pmo.eflags & MFE_UNDERWATER)
+    and selectedMovie == movieList.default then
+        selectedMovie = movieList.uwDeath
+    end
+    
     if type(selectedMovie) == "table" then
         selectedMovie = selectedMovie[P_RandomRange(1, #selectedMovie)]
     end
@@ -42,4 +53,22 @@ Bubsy3D.addMovie({
     name = "DROWN",
     fps = 15,
     numframes = 111
+})
+
+Bubsy3D.addMovie({
+    name = "UWDEATH1",
+    fps = 15,
+    numframes = 104
+})
+
+Bubsy3D.addMovie({
+    name = "UWDEATH2",
+    fps = 15,
+    numframes = 83
+})
+
+Bubsy3D.addMovie({
+    name = "UWDEATH3",
+    fps = 15,
+    numframes = 100
 })
