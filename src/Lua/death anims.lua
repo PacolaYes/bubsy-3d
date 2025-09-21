@@ -31,13 +31,12 @@ addHook("MobjDeath", function(pmo, inf, src, dmgtype)
     and selectedMovie == movieList.default then
         selectedMovie = movieList.uwDeath
     end
-    
+
     if type(selectedMovie) == "table" then
         selectedMovie = selectedMovie[P_RandomRange(1, #selectedMovie)]
     end
 
     Bubsy3D.startMovie(p, selectedMovie)
-    --p.playerstate = PST_DEAD
     Bubsy3D.state.changeState(p, "you are dead, no big surprise")
 end, MT_PLAYER)
 
@@ -46,29 +45,40 @@ end, MT_PLAYER)
 Bubsy3D.addMovie({
     name = "EXPLODE",
     fps = 15,
+    sfx = freeslot("sfx_b3dexp"),
     numframes = 91
 })
 
 Bubsy3D.addMovie({
     name = "DROWN",
     fps = 15,
+    sfx = freeslot("sfx_b3ddrw"),
     numframes = 111
 })
 
 Bubsy3D.addMovie({
     name = "UWDEATH1",
     fps = 15,
+    sfx = freeslot("sfx_b3duw1"),
     numframes = 104
 })
 
 Bubsy3D.addMovie({
     name = "UWDEATH2",
     fps = 15,
+    sfx = freeslot("sfx_b3duw2"),
     numframes = 83
 })
 
 Bubsy3D.addMovie({
     name = "UWDEATH3",
     fps = 15,
+    sfx = freeslot("sfx_b3duw3"),
     numframes = 100
 })
+
+sfxinfo[sfx_b3dexp].caption = "Look at what you did."
+sfxinfo[sfx_b3ddrw].caption = "Bubsy's Vice Pawsity ;)" -- this joke sucks
+sfxinfo[sfx_b3duw1].caption = "Hey Bubsy! chest."
+sfxinfo[sfx_b3duw2].caption = "bubel"
+sfxinfo[sfx_b3duw3].caption = "Jones' bobcat."

@@ -6,6 +6,7 @@
 ---@class bubsyMovies
 ---@field name string the name the movie's graphics use
 ---@field numframes number how many frames the movie has
+---@field sfx number? the movie's audio.
 ---@field fps number the frames per second the movie uses.
 
 local movieMetatable = {

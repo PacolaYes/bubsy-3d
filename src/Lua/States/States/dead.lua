@@ -7,6 +7,9 @@ Bubsy3D.state.addState({
         local def = p.bubsy3d.movie.definition
         if def then -- how are you here if you're not playing a movie already??
             p.deadtimer = 70 - (def.numframes * TICRATE / def.fps - 1)
+            if def.sfx then
+                S_StartSound(nil, def.sfx, p)
+            end
         end
     end,
 
